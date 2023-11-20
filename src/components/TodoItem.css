@@ -1,0 +1,23 @@
+.TodoItem {
+    display: flex;
+    gap:20px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    padding-bottom : 20px;
+    align-items:center;
+}
+
+.TodoItem input {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.TodoItem .content {
+    flex:1;
+}
+
+
+.TodoUIte .date{
+    font-size: 14pxl
+    ;
+}
