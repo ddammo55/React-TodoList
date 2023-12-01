@@ -1,7 +1,7 @@
 import './Header.css';
-import React from 'react';
+import { memo } from 'react';
 
-export default function Header() {
+function Header() {
     return (
         <div className='Header'>
            <h1>{new Date().toDateString()} </h1>
@@ -9,3 +9,4 @@ export default function Header() {
     );
 }
 
+export default memo(Header);

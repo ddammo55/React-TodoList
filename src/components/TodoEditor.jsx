@@ -1,7 +1,12 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import './TodoEditor.css'
+import { TodoContext  } from '../TodoContext';
 
-export default function TodoEditor({onCreate}) {
+export default function TodoEditor() {
+
+    const { onCreate } = useContext(TodoContext);
+    //console.log({ onCreate })
+
     const [content, setContent] = useState('');
     const inputRef = useRef();
 
@@ -20,7 +25,7 @@ export default function TodoEditor({onCreate}) {
     }
 
     const onKeyDown=(e) => {
-        if(e.key === 'Enter') {
+        if(e.keyCode === 13) {
             onClick();
         }
     }

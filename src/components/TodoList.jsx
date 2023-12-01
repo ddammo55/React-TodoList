@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useMemo, useContext } from 'react';
 import TodoItem from './TodoItem';
 import './TodoList.css'
+import { TodoContext  } from '../TodoContext';
 
-export default function TodoList({todos}) {
+export default function TodoList() {
+
+  const { todos } = useContext(TodoContext);
 
   const [search, setSearch] = useState('');
 
@@ -19,8 +22,28 @@ export default function TodoList({todos}) {
     return todos.filter((todo) => todo.content.toLowerCase().includes(search.toLowerCase()));
   }
 
+
+  const {totalCount, doneCount, notDoneCount} = useMemo(()=>{
+    //최적화하고 싶은 연산을 넣는다.
+    console.log("TODO 분석 함수 호출")
+    const totalCount = todos.length;
+    const doneCount = todos.filter((todo) => todo.isDone).length;
+    const notDoneCount = totalCount - doneCount;
+    return {
+      totalCount,
+      doneCount,
+      notDoneCount
+    }
+  }, [todos]);
+
     return (
         <div className='TodoList'>
+            <h4>Todos</h4>
+            <div>
+              <div>전체 투두 :  {totalCount}</div>
+              <div>완료 투두 :  {doneCount}</div>
+              <div>미완 투두 : {notDoneCount}</div>
+            </div>
            <input value={search} onChange={onChangeSearch} placeholder='검색어를 입력하세요' />
            
             <div>
